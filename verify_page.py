@@ -62,6 +62,19 @@ def main() -> int:
        all(f'for="guests-{v}"' in raw for v in values), True)
     ck("no zero position", 'value="0"' in raw, False)
 
+    print("the cells the reader clicks")
+    # iohan's defect, as a check: the base rule was `input[type="radio"] + label`, an adjacent-sibling
+    # selector, while every label sits inside `.choices`. It matched nothing, no error was raised, and
+    # the cells rendered at 27px instead of the intended 61px. Content checks cannot see a selector
+    # that matches nothing; this one names the container the labels are actually in.
+    cells = re.search(r'<div class="choices">(.*?)</div>', raw, re.S)
+    ck("the labels all sit inside .choices", len(re.findall(r"<label for=", cells.group(1))) if cells else 0, 12)
+    ck("a rule targets the container the labels are in",
+       re.search(r'\.choices\s+label\s*\{', raw) is not None, True)
+    ck("no sibling selector a label could never satisfy", re.findall(r"\+\s*label", raw), [])
+    ck("the touch target is on the labels",
+       re.search(r'\.choices\s+label\s*\{[^}]*min-height:\s*6\dpx', raw) is not None, True)
+
     print("the fixed facts, readable without touching anything")
     ck("home has 12", ">12<" in raw and "печений дома" in raw, True)
     ck("each guest at least 6", ">6<" in raw and "минимум каждому гостю" in raw, True)

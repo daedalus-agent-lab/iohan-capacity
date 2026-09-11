@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Шкала вместимости покупки печенья</title>
+  <title>Сколько пачек печенья купить?</title>
   <style>
     :root {
       color-scheme: light;
@@ -45,12 +45,12 @@
     input[type="radio"] {
       position: absolute; inline-size: 1px; block-size: 1px; opacity: 0;
     }
-    input[type="radio"] + label {
+    .choices label {
       min-height: 61px; display: grid; place-content: center; gap: 1px; cursor: pointer;
       border: 1px solid var(--line-strong); background: var(--panel); text-align: center;
       font-family: Arial, sans-serif; font-size: .84rem; font-weight: 700;
     }
-    input[type="radio"] + label > span:first-child { font-size: 1.2rem; }
+    .choices label > span:first-child { font-size: 1.2rem; }
     .guest-word { font-size: .66rem; font-weight: 400; color: var(--muted); }
     #guests-1:checked ~ .choices label[for="guests-1"],
     #guests-2:checked ~ .choices label[for="guests-2"],
@@ -148,8 +148,8 @@
 <body>
   <main>
     <header>
-      <h1>Шкала вместимости покупки печенья</h1>
-      <p class="purpose">План покупки по числу гостей.</p>
+      <h1>Сколько пачек печенья купить?</h1>
+      <p class="purpose">Дома есть 12 печений. Каждому гостю нужно хотя бы 6. В пачке — 8. Выберите число гостей — узнаете, сколько пачек докупить.</p>
       <section class="facts" aria-label="Исходные условия">
         <div class="fact"><strong>12</strong><span>печений дома</span></div>
         <div class="fact"><strong>6</strong><span>печений минимум каждому гостю</span></div>
@@ -192,60 +192,60 @@
           <div class="answer">
             <h2>Покупать не нужно</h2>
             <p class="coverage">С этой покупкой хватит до 2 гостей</p>
-            <p class="note">Двенадцати домашних печений хватает на 2 гостей; пачка не нужна.</p>
+            <p class="note">Домашнего печенья хватит на 2 гостей.</p>
           </div>
 
           <figure class="scale-figure">
             <figcaption>Шкала позиций гостей: 1–12</figcaption>
-            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>Печенья хватит <span class="key-swatch outside-key" aria-hidden="true"></span>Печенья не хватит</p>
             <ol class="scale">
-              <li class="covered current" aria-label="Позиция 1: В пределах покупки; выбрано">
+              <li class="covered current" aria-label="Позиция 1: Печенья хватит; выбрано">
                 <span class="position-number">1</span>
-                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+                <span class="position-status">Печенья хватит</span><span class="current-mark">Выбрано</span>
               </li>
-              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+              <li class="covered" aria-label="Позиция 2: Печенья хватит">
                 <span class="position-number">2</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 3: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 3: Печенья не хватит">
                 <span class="position-number">3</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 4: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 4: Печенья не хватит">
                 <span class="position-number">4</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 5: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 5: Печенья не хватит">
                 <span class="position-number">5</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 6: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 6: Печенья не хватит">
                 <span class="position-number">6</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 7: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 7: Печенья не хватит">
                 <span class="position-number">7</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 8: Печенья не хватит">
                 <span class="position-number">8</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 9: Печенья не хватит">
                 <span class="position-number">9</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 10: Печенья не хватит">
                 <span class="position-number">10</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 11: Печенья не хватит">
                 <span class="position-number">11</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 12: Печенья не хватит">
                 <span class="position-number">12</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
             </ol>
           </figure>
@@ -255,60 +255,60 @@
           <div class="answer">
             <h2>Покупать не нужно</h2>
             <p class="coverage">С этой покупкой хватит до 2 гостей</p>
-            <p class="note">Двенадцати домашних печений хватает на 2 гостей; пачка не нужна.</p>
+            <p class="note">Домашнего печенья хватит на 2 гостей.</p>
           </div>
 
           <figure class="scale-figure">
             <figcaption>Шкала позиций гостей: 1–12</figcaption>
-            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>Печенья хватит <span class="key-swatch outside-key" aria-hidden="true"></span>Печенья не хватит</p>
             <ol class="scale">
-              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+              <li class="covered" aria-label="Позиция 1: Печенья хватит">
                 <span class="position-number">1</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered current" aria-label="Позиция 2: В пределах покупки; выбрано">
+              <li class="covered current" aria-label="Позиция 2: Печенья хватит; выбрано">
                 <span class="position-number">2</span>
-                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+                <span class="position-status">Печенья хватит</span><span class="current-mark">Выбрано</span>
               </li>
-              <li class="outside" aria-label="Позиция 3: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 3: Печенья не хватит">
                 <span class="position-number">3</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 4: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 4: Печенья не хватит">
                 <span class="position-number">4</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 5: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 5: Печенья не хватит">
                 <span class="position-number">5</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 6: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 6: Печенья не хватит">
                 <span class="position-number">6</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 7: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 7: Печенья не хватит">
                 <span class="position-number">7</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 8: Печенья не хватит">
                 <span class="position-number">8</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 9: Печенья не хватит">
                 <span class="position-number">9</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 10: Печенья не хватит">
                 <span class="position-number">10</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 11: Печенья не хватит">
                 <span class="position-number">11</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 12: Печенья не хватит">
                 <span class="position-number">12</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
             </ol>
           </figure>
@@ -318,60 +318,60 @@
           <div class="answer">
             <h2>Купить 1 пачку</h2>
             <p class="coverage">С этой покупкой хватит до 3 гостей</p>
-            <p class="note">Порог: на 2 гостей хватало домашних печений. Ещё одна пачка — итого 1 пачка; итог назван целиком, держать прошлое в голове не нужно.</p>
+            <p class="note">Порог: на 2 гостей хватало домашних печений. Ещё одна пачка — итого 1 пачка.</p>
           </div>
 
           <figure class="scale-figure">
             <figcaption>Шкала позиций гостей: 1–12</figcaption>
-            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>Печенья хватит <span class="key-swatch outside-key" aria-hidden="true"></span>Печенья не хватит</p>
             <ol class="scale">
-              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+              <li class="covered" aria-label="Позиция 1: Печенья хватит">
                 <span class="position-number">1</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+              <li class="covered" aria-label="Позиция 2: Печенья хватит">
                 <span class="position-number">2</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered current" aria-label="Позиция 3: В пределах покупки; выбрано">
+              <li class="covered current" aria-label="Позиция 3: Печенья хватит; выбрано">
                 <span class="position-number">3</span>
-                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+                <span class="position-status">Печенья хватит</span><span class="current-mark">Выбрано</span>
               </li>
-              <li class="outside" aria-label="Позиция 4: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 4: Печенья не хватит">
                 <span class="position-number">4</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 5: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 5: Печенья не хватит">
                 <span class="position-number">5</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 6: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 6: Печенья не хватит">
                 <span class="position-number">6</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 7: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 7: Печенья не хватит">
                 <span class="position-number">7</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 8: Печенья не хватит">
                 <span class="position-number">8</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 9: Печенья не хватит">
                 <span class="position-number">9</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 10: Печенья не хватит">
                 <span class="position-number">10</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 11: Печенья не хватит">
                 <span class="position-number">11</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 12: Печенья не хватит">
                 <span class="position-number">12</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
             </ol>
           </figure>
@@ -381,60 +381,60 @@
           <div class="answer">
             <h2>Купить 2 пачки</h2>
             <p class="coverage">С этой покупкой хватит до 4 гостей</p>
-            <p class="note">Порог: на 3 гостей хватало 1 пачки. Ещё одна пачка — итого 2 пачки; итог назван целиком, держать прошлое в голове не нужно.</p>
+            <p class="note">Порог: на 3 гостей хватало 1 пачки. Ещё одна пачка — итого 2 пачки.</p>
           </div>
 
           <figure class="scale-figure">
             <figcaption>Шкала позиций гостей: 1–12</figcaption>
-            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>Печенья хватит <span class="key-swatch outside-key" aria-hidden="true"></span>Печенья не хватит</p>
             <ol class="scale">
-              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+              <li class="covered" aria-label="Позиция 1: Печенья хватит">
                 <span class="position-number">1</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+              <li class="covered" aria-label="Позиция 2: Печенья хватит">
                 <span class="position-number">2</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+              <li class="covered" aria-label="Позиция 3: Печенья хватит">
                 <span class="position-number">3</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered current" aria-label="Позиция 4: В пределах покупки; выбрано">
+              <li class="covered current" aria-label="Позиция 4: Печенья хватит; выбрано">
                 <span class="position-number">4</span>
-                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+                <span class="position-status">Печенья хватит</span><span class="current-mark">Выбрано</span>
               </li>
-              <li class="outside" aria-label="Позиция 5: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 5: Печенья не хватит">
                 <span class="position-number">5</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 6: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 6: Печенья не хватит">
                 <span class="position-number">6</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 7: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 7: Печенья не хватит">
                 <span class="position-number">7</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 8: Печенья не хватит">
                 <span class="position-number">8</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 9: Печенья не хватит">
                 <span class="position-number">9</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 10: Печенья не хватит">
                 <span class="position-number">10</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 11: Печенья не хватит">
                 <span class="position-number">11</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 12: Печенья не хватит">
                 <span class="position-number">12</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
             </ol>
           </figure>
@@ -444,60 +444,60 @@
           <div class="answer">
             <h2>Купить 3 пачки</h2>
             <p class="coverage">С этой покупкой хватит до 6 гостей</p>
-            <p class="note">Порог: на 4 гостей хватало 2 пачки. Ещё одна пачка — итого 3 пачки; итог назван целиком, держать прошлое в голове не нужно.</p>
+            <p class="note">Порог: на 4 гостей хватало 2 пачки. Ещё одна пачка — итого 3 пачки.</p>
           </div>
 
           <figure class="scale-figure">
             <figcaption>Шкала позиций гостей: 1–12</figcaption>
-            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>Печенья хватит <span class="key-swatch outside-key" aria-hidden="true"></span>Печенья не хватит</p>
             <ol class="scale">
-              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+              <li class="covered" aria-label="Позиция 1: Печенья хватит">
                 <span class="position-number">1</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+              <li class="covered" aria-label="Позиция 2: Печенья хватит">
                 <span class="position-number">2</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+              <li class="covered" aria-label="Позиция 3: Печенья хватит">
                 <span class="position-number">3</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+              <li class="covered" aria-label="Позиция 4: Печенья хватит">
                 <span class="position-number">4</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered current" aria-label="Позиция 5: В пределах покупки; выбрано">
+              <li class="covered current" aria-label="Позиция 5: Печенья хватит; выбрано">
                 <span class="position-number">5</span>
-                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+                <span class="position-status">Печенья хватит</span><span class="current-mark">Выбрано</span>
               </li>
-              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+              <li class="covered" aria-label="Позиция 6: Печенья хватит">
                 <span class="position-number">6</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 7: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 7: Печенья не хватит">
                 <span class="position-number">7</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 8: Печенья не хватит">
                 <span class="position-number">8</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 9: Печенья не хватит">
                 <span class="position-number">9</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 10: Печенья не хватит">
                 <span class="position-number">10</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 11: Печенья не хватит">
                 <span class="position-number">11</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 12: Печенья не хватит">
                 <span class="position-number">12</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
             </ol>
           </figure>
@@ -512,55 +512,55 @@
 
           <figure class="scale-figure">
             <figcaption>Шкала позиций гостей: 1–12</figcaption>
-            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>Печенья хватит <span class="key-swatch outside-key" aria-hidden="true"></span>Печенья не хватит</p>
             <ol class="scale">
-              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+              <li class="covered" aria-label="Позиция 1: Печенья хватит">
                 <span class="position-number">1</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+              <li class="covered" aria-label="Позиция 2: Печенья хватит">
                 <span class="position-number">2</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+              <li class="covered" aria-label="Позиция 3: Печенья хватит">
                 <span class="position-number">3</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+              <li class="covered" aria-label="Позиция 4: Печенья хватит">
                 <span class="position-number">4</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+              <li class="covered" aria-label="Позиция 5: Печенья хватит">
                 <span class="position-number">5</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered current" aria-label="Позиция 6: В пределах покупки; выбрано">
+              <li class="covered current" aria-label="Позиция 6: Печенья хватит; выбрано">
                 <span class="position-number">6</span>
-                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+                <span class="position-status">Печенья хватит</span><span class="current-mark">Выбрано</span>
               </li>
-              <li class="outside" aria-label="Позиция 7: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 7: Печенья не хватит">
                 <span class="position-number">7</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 8: Печенья не хватит">
                 <span class="position-number">8</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 9: Печенья не хватит">
                 <span class="position-number">9</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 10: Печенья не хватит">
                 <span class="position-number">10</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 11: Печенья не хватит">
                 <span class="position-number">11</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 12: Печенья не хватит">
                 <span class="position-number">12</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
             </ol>
           </figure>
@@ -570,60 +570,60 @@
           <div class="answer">
             <h2>Купить 4 пачки</h2>
             <p class="coverage">С этой покупкой хватит до 7 гостей</p>
-            <p class="note">Порог: на 6 гостей хватало 3 пачки. Ещё одна пачка — итого 4 пачки; итог назван целиком, держать прошлое в голове не нужно.</p>
+            <p class="note">Порог: на 6 гостей хватало 3 пачки. Ещё одна пачка — итого 4 пачки.</p>
           </div>
 
           <figure class="scale-figure">
             <figcaption>Шкала позиций гостей: 1–12</figcaption>
-            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>Печенья хватит <span class="key-swatch outside-key" aria-hidden="true"></span>Печенья не хватит</p>
             <ol class="scale">
-              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+              <li class="covered" aria-label="Позиция 1: Печенья хватит">
                 <span class="position-number">1</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+              <li class="covered" aria-label="Позиция 2: Печенья хватит">
                 <span class="position-number">2</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+              <li class="covered" aria-label="Позиция 3: Печенья хватит">
                 <span class="position-number">3</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+              <li class="covered" aria-label="Позиция 4: Печенья хватит">
                 <span class="position-number">4</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+              <li class="covered" aria-label="Позиция 5: Печенья хватит">
                 <span class="position-number">5</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+              <li class="covered" aria-label="Позиция 6: Печенья хватит">
                 <span class="position-number">6</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered current" aria-label="Позиция 7: В пределах покупки; выбрано">
+              <li class="covered current" aria-label="Позиция 7: Печенья хватит; выбрано">
                 <span class="position-number">7</span>
-                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+                <span class="position-status">Печенья хватит</span><span class="current-mark">Выбрано</span>
               </li>
-              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 8: Печенья не хватит">
                 <span class="position-number">8</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 9: Печенья не хватит">
                 <span class="position-number">9</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 10: Печенья не хватит">
                 <span class="position-number">10</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 11: Печенья не хватит">
                 <span class="position-number">11</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 12: Печенья не хватит">
                 <span class="position-number">12</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
             </ol>
           </figure>
@@ -633,60 +633,60 @@
           <div class="answer">
             <h2>Купить 5 пачек</h2>
             <p class="coverage">С этой покупкой хватит до 8 гостей</p>
-            <p class="note">Порог: на 7 гостей хватало 4 пачки. Ещё одна пачка — итого 5 пачек; итог назван целиком, держать прошлое в голове не нужно.</p>
+            <p class="note">Порог: на 7 гостей хватало 4 пачки. Ещё одна пачка — итого 5 пачек.</p>
           </div>
 
           <figure class="scale-figure">
             <figcaption>Шкала позиций гостей: 1–12</figcaption>
-            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>Печенья хватит <span class="key-swatch outside-key" aria-hidden="true"></span>Печенья не хватит</p>
             <ol class="scale">
-              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+              <li class="covered" aria-label="Позиция 1: Печенья хватит">
                 <span class="position-number">1</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+              <li class="covered" aria-label="Позиция 2: Печенья хватит">
                 <span class="position-number">2</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+              <li class="covered" aria-label="Позиция 3: Печенья хватит">
                 <span class="position-number">3</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+              <li class="covered" aria-label="Позиция 4: Печенья хватит">
                 <span class="position-number">4</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+              <li class="covered" aria-label="Позиция 5: Печенья хватит">
                 <span class="position-number">5</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+              <li class="covered" aria-label="Позиция 6: Печенья хватит">
                 <span class="position-number">6</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 7: В пределах покупки">
+              <li class="covered" aria-label="Позиция 7: Печенья хватит">
                 <span class="position-number">7</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered current" aria-label="Позиция 8: В пределах покупки; выбрано">
+              <li class="covered current" aria-label="Позиция 8: Печенья хватит; выбрано">
                 <span class="position-number">8</span>
-                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+                <span class="position-status">Печенья хватит</span><span class="current-mark">Выбрано</span>
               </li>
-              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 9: Печенья не хватит">
                 <span class="position-number">9</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 10: Печенья не хватит">
                 <span class="position-number">10</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 11: Печенья не хватит">
                 <span class="position-number">11</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 12: Печенья не хватит">
                 <span class="position-number">12</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
             </ol>
           </figure>
@@ -696,60 +696,60 @@
           <div class="answer">
             <h2>Купить 6 пачек</h2>
             <p class="coverage">С этой покупкой хватит до 10 гостей</p>
-            <p class="note">Порог: на 8 гостей хватало 5 пачек. Ещё одна пачка — итого 6 пачек; итог назван целиком, держать прошлое в голове не нужно.</p>
+            <p class="note">Порог: на 8 гостей хватало 5 пачек. Ещё одна пачка — итого 6 пачек.</p>
           </div>
 
           <figure class="scale-figure">
             <figcaption>Шкала позиций гостей: 1–12</figcaption>
-            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>Печенья хватит <span class="key-swatch outside-key" aria-hidden="true"></span>Печенья не хватит</p>
             <ol class="scale">
-              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+              <li class="covered" aria-label="Позиция 1: Печенья хватит">
                 <span class="position-number">1</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+              <li class="covered" aria-label="Позиция 2: Печенья хватит">
                 <span class="position-number">2</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+              <li class="covered" aria-label="Позиция 3: Печенья хватит">
                 <span class="position-number">3</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+              <li class="covered" aria-label="Позиция 4: Печенья хватит">
                 <span class="position-number">4</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+              <li class="covered" aria-label="Позиция 5: Печенья хватит">
                 <span class="position-number">5</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+              <li class="covered" aria-label="Позиция 6: Печенья хватит">
                 <span class="position-number">6</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 7: В пределах покупки">
+              <li class="covered" aria-label="Позиция 7: Печенья хватит">
                 <span class="position-number">7</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 8: В пределах покупки">
+              <li class="covered" aria-label="Позиция 8: Печенья хватит">
                 <span class="position-number">8</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered current" aria-label="Позиция 9: В пределах покупки; выбрано">
+              <li class="covered current" aria-label="Позиция 9: Печенья хватит; выбрано">
                 <span class="position-number">9</span>
-                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+                <span class="position-status">Печенья хватит</span><span class="current-mark">Выбрано</span>
               </li>
-              <li class="covered" aria-label="Позиция 10: В пределах покупки">
+              <li class="covered" aria-label="Позиция 10: Печенья хватит">
                 <span class="position-number">10</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 11: Печенья не хватит">
                 <span class="position-number">11</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 12: Печенья не хватит">
                 <span class="position-number">12</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
             </ol>
           </figure>
@@ -764,55 +764,55 @@
 
           <figure class="scale-figure">
             <figcaption>Шкала позиций гостей: 1–12</figcaption>
-            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>Печенья хватит <span class="key-swatch outside-key" aria-hidden="true"></span>Печенья не хватит</p>
             <ol class="scale">
-              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+              <li class="covered" aria-label="Позиция 1: Печенья хватит">
                 <span class="position-number">1</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+              <li class="covered" aria-label="Позиция 2: Печенья хватит">
                 <span class="position-number">2</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+              <li class="covered" aria-label="Позиция 3: Печенья хватит">
                 <span class="position-number">3</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+              <li class="covered" aria-label="Позиция 4: Печенья хватит">
                 <span class="position-number">4</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+              <li class="covered" aria-label="Позиция 5: Печенья хватит">
                 <span class="position-number">5</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+              <li class="covered" aria-label="Позиция 6: Печенья хватит">
                 <span class="position-number">6</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 7: В пределах покупки">
+              <li class="covered" aria-label="Позиция 7: Печенья хватит">
                 <span class="position-number">7</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 8: В пределах покупки">
+              <li class="covered" aria-label="Позиция 8: Печенья хватит">
                 <span class="position-number">8</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 9: В пределах покупки">
+              <li class="covered" aria-label="Позиция 9: Печенья хватит">
                 <span class="position-number">9</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered current" aria-label="Позиция 10: В пределах покупки; выбрано">
+              <li class="covered current" aria-label="Позиция 10: Печенья хватит; выбрано">
                 <span class="position-number">10</span>
-                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+                <span class="position-status">Печенья хватит</span><span class="current-mark">Выбрано</span>
               </li>
-              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 11: Печенья не хватит">
                 <span class="position-number">11</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
-              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 12: Печенья не хватит">
                 <span class="position-number">12</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
             </ol>
           </figure>
@@ -822,60 +822,60 @@
           <div class="answer">
             <h2>Купить 7 пачек</h2>
             <p class="coverage">С этой покупкой хватит до 11 гостей</p>
-            <p class="note">Порог: на 10 гостей хватало 6 пачек. Ещё одна пачка — итого 7 пачек; итог назван целиком, держать прошлое в голове не нужно.</p>
+            <p class="note">Порог: на 10 гостей хватало 6 пачек. Ещё одна пачка — итого 7 пачек.</p>
           </div>
 
           <figure class="scale-figure">
             <figcaption>Шкала позиций гостей: 1–12</figcaption>
-            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>Печенья хватит <span class="key-swatch outside-key" aria-hidden="true"></span>Печенья не хватит</p>
             <ol class="scale">
-              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+              <li class="covered" aria-label="Позиция 1: Печенья хватит">
                 <span class="position-number">1</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+              <li class="covered" aria-label="Позиция 2: Печенья хватит">
                 <span class="position-number">2</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+              <li class="covered" aria-label="Позиция 3: Печенья хватит">
                 <span class="position-number">3</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+              <li class="covered" aria-label="Позиция 4: Печенья хватит">
                 <span class="position-number">4</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+              <li class="covered" aria-label="Позиция 5: Печенья хватит">
                 <span class="position-number">5</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+              <li class="covered" aria-label="Позиция 6: Печенья хватит">
                 <span class="position-number">6</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 7: В пределах покупки">
+              <li class="covered" aria-label="Позиция 7: Печенья хватит">
                 <span class="position-number">7</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 8: В пределах покупки">
+              <li class="covered" aria-label="Позиция 8: Печенья хватит">
                 <span class="position-number">8</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 9: В пределах покупки">
+              <li class="covered" aria-label="Позиция 9: Печенья хватит">
                 <span class="position-number">9</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 10: В пределах покупки">
+              <li class="covered" aria-label="Позиция 10: Печенья хватит">
                 <span class="position-number">10</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered current" aria-label="Позиция 11: В пределах покупки; выбрано">
+              <li class="covered current" aria-label="Позиция 11: Печенья хватит; выбрано">
                 <span class="position-number">11</span>
-                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+                <span class="position-status">Печенья хватит</span><span class="current-mark">Выбрано</span>
               </li>
-              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+              <li class="outside" aria-label="Позиция 12: Печенья не хватит">
                 <span class="position-number">12</span>
-                <span class="position-status">Вне пределов покупки</span>
+                <span class="position-status">Печенья не хватит</span>
               </li>
             </ol>
           </figure>
@@ -885,60 +885,60 @@
           <div class="answer">
             <h2>Купить 8 пачек</h2>
             <p class="coverage">С этой покупкой хватит до 12 гостей</p>
-            <p class="note">Порог: на 11 гостей хватало 7 пачек. Ещё одна пачка — итого 8 пачек; итог назван целиком, держать прошлое в голове не нужно.</p>
+            <p class="note">Порог: на 11 гостей хватало 7 пачек. Ещё одна пачка — итого 8 пачек.</p>
           </div>
 
           <figure class="scale-figure">
             <figcaption>Шкала позиций гостей: 1–12</figcaption>
-            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>Печенья хватит <span class="key-swatch outside-key" aria-hidden="true"></span>Печенья не хватит</p>
             <ol class="scale">
-              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+              <li class="covered" aria-label="Позиция 1: Печенья хватит">
                 <span class="position-number">1</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+              <li class="covered" aria-label="Позиция 2: Печенья хватит">
                 <span class="position-number">2</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+              <li class="covered" aria-label="Позиция 3: Печенья хватит">
                 <span class="position-number">3</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+              <li class="covered" aria-label="Позиция 4: Печенья хватит">
                 <span class="position-number">4</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+              <li class="covered" aria-label="Позиция 5: Печенья хватит">
                 <span class="position-number">5</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+              <li class="covered" aria-label="Позиция 6: Печенья хватит">
                 <span class="position-number">6</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 7: В пределах покупки">
+              <li class="covered" aria-label="Позиция 7: Печенья хватит">
                 <span class="position-number">7</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 8: В пределах покупки">
+              <li class="covered" aria-label="Позиция 8: Печенья хватит">
                 <span class="position-number">8</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 9: В пределах покупки">
+              <li class="covered" aria-label="Позиция 9: Печенья хватит">
                 <span class="position-number">9</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 10: В пределах покупки">
+              <li class="covered" aria-label="Позиция 10: Печенья хватит">
                 <span class="position-number">10</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered" aria-label="Позиция 11: В пределах покупки">
+              <li class="covered" aria-label="Позиция 11: Печенья хватит">
                 <span class="position-number">11</span>
-                <span class="position-status">В пределах покупки</span>
+                <span class="position-status">Печенья хватит</span>
               </li>
-              <li class="covered current" aria-label="Позиция 12: В пределах покупки; выбрано">
+              <li class="covered current" aria-label="Позиция 12: Печенья хватит; выбрано">
                 <span class="position-number">12</span>
-                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+                <span class="position-status">Печенья хватит</span><span class="current-mark">Выбрано</span>
               </li>
             </ol>
           </figure>
