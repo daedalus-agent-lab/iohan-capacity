@@ -1,0 +1,952 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Шкала вместимости покупки печенья</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202629;
+      --muted: #546066;
+      --paper: #f7f5f0;
+      --panel: #ffffff;
+      --line: #c9c7bd;
+      --line-strong: #6f716b;
+      --covered: #244c4d;
+      --covered-soft: #dbe8e4;
+      --selected: #973d20;
+      --focus: #125fb1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    main { max-width: 1060px; margin: 0 auto; padding: 48px 28px 32px; }
+    header { border-bottom: 2px solid var(--ink); padding-bottom: 25px; }
+    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.04; font-weight: 600; letter-spacing: -.025em; }
+    .purpose { margin: 15px 0 0; max-width: 42rem; color: var(--muted); }
+    .facts {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      margin: 28px 0 0; background: var(--line-strong); border: 1px solid var(--line-strong);
+    }
+    .fact { background: var(--panel); padding: 17px 18px 16px; }
+    .fact strong { display: block; font-family: Arial, sans-serif; font-size: 1.6rem; line-height: 1; color: var(--covered); }
+    .fact span { display: block; margin-top: 7px; font-size: .9rem; color: var(--muted); }
+    fieldset { border: 0; margin: 0; padding: 33px 0 0; min-width: 0; }
+    legend { padding: 0; font-family: Arial, sans-serif; font-size: 1.05rem; font-weight: 700; }
+    .choice-help { margin: 5px 0 15px; color: var(--muted); font-size: .92rem; }
+    .choices { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 6px; }
+    input[type="radio"] {
+      position: absolute; inline-size: 1px; block-size: 1px; opacity: 0;
+    }
+    input[type="radio"] + label {
+      min-height: 61px; display: grid; place-content: center; gap: 1px; cursor: pointer;
+      border: 1px solid var(--line-strong); background: var(--panel); text-align: center;
+      font-family: Arial, sans-serif; font-size: .84rem; font-weight: 700;
+    }
+    input[type="radio"] + label > span:first-child { font-size: 1.2rem; }
+    .guest-word { font-size: .66rem; font-weight: 400; color: var(--muted); }
+    #guests-1:checked ~ .choices label[for="guests-1"],
+    #guests-2:checked ~ .choices label[for="guests-2"],
+    #guests-3:checked ~ .choices label[for="guests-3"],
+    #guests-4:checked ~ .choices label[for="guests-4"],
+    #guests-5:checked ~ .choices label[for="guests-5"],
+    #guests-6:checked ~ .choices label[for="guests-6"],
+    #guests-7:checked ~ .choices label[for="guests-7"],
+    #guests-8:checked ~ .choices label[for="guests-8"],
+    #guests-9:checked ~ .choices label[for="guests-9"],
+    #guests-10:checked ~ .choices label[for="guests-10"],
+    #guests-11:checked ~ .choices label[for="guests-11"],
+    #guests-12:checked ~ .choices label[for="guests-12"] {
+      background: var(--ink); border-color: var(--ink); color: #fff; box-shadow: inset 0 -4px 0 var(--selected);
+    }
+    #guests-1:checked ~ .choices label[for="guests-1"] .guest-word,
+    #guests-2:checked ~ .choices label[for="guests-2"] .guest-word,
+    #guests-3:checked ~ .choices label[for="guests-3"] .guest-word,
+    #guests-4:checked ~ .choices label[for="guests-4"] .guest-word,
+    #guests-5:checked ~ .choices label[for="guests-5"] .guest-word,
+    #guests-6:checked ~ .choices label[for="guests-6"] .guest-word,
+    #guests-7:checked ~ .choices label[for="guests-7"] .guest-word,
+    #guests-8:checked ~ .choices label[for="guests-8"] .guest-word,
+    #guests-9:checked ~ .choices label[for="guests-9"] .guest-word,
+    #guests-10:checked ~ .choices label[for="guests-10"] .guest-word,
+    #guests-11:checked ~ .choices label[for="guests-11"] .guest-word,
+    #guests-12:checked ~ .choices label[for="guests-12"] .guest-word { color: #fff; }
+    #guests-1:focus-visible ~ .choices label[for="guests-1"],
+    #guests-2:focus-visible ~ .choices label[for="guests-2"],
+    #guests-3:focus-visible ~ .choices label[for="guests-3"],
+    #guests-4:focus-visible ~ .choices label[for="guests-4"],
+    #guests-5:focus-visible ~ .choices label[for="guests-5"],
+    #guests-6:focus-visible ~ .choices label[for="guests-6"],
+    #guests-7:focus-visible ~ .choices label[for="guests-7"],
+    #guests-8:focus-visible ~ .choices label[for="guests-8"],
+    #guests-9:focus-visible ~ .choices label[for="guests-9"],
+    #guests-10:focus-visible ~ .choices label[for="guests-10"],
+    #guests-11:focus-visible ~ .choices label[for="guests-11"],
+    #guests-12:focus-visible ~ .choices label[for="guests-12"] { outline: 3px solid var(--focus); outline-offset: 3px; }
+    .planner { margin-top: 27px; }
+    .panel { display: none; grid-template-columns: minmax(220px, .72fr) minmax(0, 1.28fr); gap: 30px; align-items: start; }
+    #guests-1:checked ~ .planner .for-1 { display: grid; }
+#guests-2:checked ~ .planner .for-2 { display: grid; }
+#guests-3:checked ~ .planner .for-3 { display: grid; }
+#guests-4:checked ~ .planner .for-4 { display: grid; }
+#guests-5:checked ~ .planner .for-5 { display: grid; }
+#guests-6:checked ~ .planner .for-6 { display: grid; }
+#guests-7:checked ~ .planner .for-7 { display: grid; }
+#guests-8:checked ~ .planner .for-8 { display: grid; }
+#guests-9:checked ~ .planner .for-9 { display: grid; }
+#guests-10:checked ~ .planner .for-10 { display: grid; }
+#guests-11:checked ~ .planner .for-11 { display: grid; }
+#guests-12:checked ~ .planner .for-12 { display: grid; }
+    .answer { padding-top: 8px; }
+    h2 { margin: 0; font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.16; font-weight: 600; }
+    .coverage { margin: 11px 0 0; font-family: Arial, sans-serif; font-size: 1.03rem; font-weight: 700; color: var(--covered); }
+    .note { margin: 19px 0 0; padding: 15px 0 0; border-top: 1px solid var(--line); color: #333b3e; font-size: .98rem; }
+    .scale-figure { margin: 0; }
+    figcaption { font-family: Arial, sans-serif; font-size: 1.05rem; font-weight: 700; }
+    .scale-key { display: flex; flex-wrap: wrap; align-items: center; column-gap: 7px; row-gap: 5px; margin: 8px 0 13px; color: var(--muted); font-size: .78rem; }
+    .key-swatch { width: 18px; height: 14px; margin-left: 10px; border: 1px solid var(--line-strong); }
+    .key-swatch:first-child { margin-left: 0; }
+    .covered-key { background: repeating-linear-gradient(135deg, var(--covered-soft) 0 4px, var(--covered) 4px 6px); }
+    .outside-key { background: #fff; }
+    .scale { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 4px; margin: 0; padding: 0; list-style: none; }
+    .scale li {
+      position: relative; min-height: 138px; display: flex; flex-direction: column; justify-content: space-between;
+      padding: 12px 8px 9px; border: 1px solid var(--line-strong); background: var(--panel);
+    }
+    .scale li.covered {
+      border-color: var(--covered); background-color: var(--covered-soft);
+      background-image: repeating-linear-gradient(135deg, transparent 0 7px, rgba(36,76,77,.12) 7px 9px);
+    }
+    .scale li.current { border: 3px solid var(--selected); padding: 10px 6px 7px; }
+    .position-number { font-family: Arial, sans-serif; font-size: clamp(1.35rem, 2.5vw, 2rem); font-weight: 700; line-height: 1; }
+    .position-status { font-family: Arial, sans-serif; font-size: .65rem; line-height: 1.17; font-weight: 700; }
+    .current-mark { margin-top: 8px; font-family: Arial, sans-serif; font-size: .64rem; font-weight: 700; text-transform: uppercase; letter-spacing: .035em; color: var(--selected); }
+    footer { margin-top: 36px; padding-top: 15px; border-top: 1px solid var(--line-strong); color: var(--muted); font-size: .78rem; }
+    @media (max-width: 760px) {
+      main { padding: 32px 16px 24px; }
+      .facts { grid-template-columns: 1fr; }
+      .choices { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .panel { grid-template-columns: 1fr; gap: 26px; }
+      .scale { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .scale li { min-height: 96px; }
+    }
+    @media (max-width: 390px) {
+      body { font-size: 17px; }
+      .choices { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .scale { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Шкала вместимости покупки печенья</h1>
+      <p class="purpose">План покупки по числу гостей.</p>
+      <section class="facts" aria-label="Исходные условия">
+        <div class="fact"><strong>12</strong><span>печений дома</span></div>
+        <div class="fact"><strong>6</strong><span>печений минимум каждому гостю</span></div>
+        <div class="fact"><strong>8</strong><span>печений в пачке</span></div>
+      </section>
+    </header>
+
+    <fieldset>
+      <legend>Сколько будет гостей?</legend>
+      <p class="choice-help">Выберите число от 1 до 12.</p>
+      <input type="radio" name="guests" id="guests-1" value="1">
+      <input type="radio" name="guests" id="guests-2" value="2">
+      <input type="radio" name="guests" id="guests-3" value="3" checked>
+      <input type="radio" name="guests" id="guests-4" value="4">
+      <input type="radio" name="guests" id="guests-5" value="5">
+      <input type="radio" name="guests" id="guests-6" value="6">
+      <input type="radio" name="guests" id="guests-7" value="7">
+      <input type="radio" name="guests" id="guests-8" value="8">
+      <input type="radio" name="guests" id="guests-9" value="9">
+      <input type="radio" name="guests" id="guests-10" value="10">
+      <input type="radio" name="guests" id="guests-11" value="11">
+      <input type="radio" name="guests" id="guests-12" value="12">
+      <div class="choices">
+        <label for="guests-1"><span>1</span> <span class="guest-word">гость</span></label>
+        <label for="guests-2"><span>2</span> <span class="guest-word">гостя</span></label>
+        <label for="guests-3"><span>3</span> <span class="guest-word">гостя</span></label>
+        <label for="guests-4"><span>4</span> <span class="guest-word">гостя</span></label>
+        <label for="guests-5"><span>5</span> <span class="guest-word">гостей</span></label>
+        <label for="guests-6"><span>6</span> <span class="guest-word">гостей</span></label>
+        <label for="guests-7"><span>7</span> <span class="guest-word">гостей</span></label>
+        <label for="guests-8"><span>8</span> <span class="guest-word">гостей</span></label>
+        <label for="guests-9"><span>9</span> <span class="guest-word">гостей</span></label>
+        <label for="guests-10"><span>10</span> <span class="guest-word">гостей</span></label>
+        <label for="guests-11"><span>11</span> <span class="guest-word">гостей</span></label>
+        <label for="guests-12"><span>12</span> <span class="guest-word">гостей</span></label>
+      </div>
+
+      <div class="planner" aria-live="polite">
+        <section class="result panel for-1" data-guests="1" data-packs="0" data-capacity="2" data-covers="1,2" data-is-threshold="false" aria-label="Результат для 1 гостя">
+          <div class="answer">
+            <h2>Покупать не нужно</h2>
+            <p class="coverage">С этой покупкой хватит до 2 гостей</p>
+            <p class="note">Двенадцати домашних печений хватает на 2 гостей; пачка не нужна.</p>
+          </div>
+
+          <figure class="scale-figure">
+            <figcaption>Шкала позиций гостей: 1–12</figcaption>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <ol class="scale">
+              <li class="covered current" aria-label="Позиция 1: В пределах покупки; выбрано">
+                <span class="position-number">1</span>
+                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+              </li>
+              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+                <span class="position-number">2</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 3: Вне пределов покупки">
+                <span class="position-number">3</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 4: Вне пределов покупки">
+                <span class="position-number">4</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 5: Вне пределов покупки">
+                <span class="position-number">5</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 6: Вне пределов покупки">
+                <span class="position-number">6</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 7: Вне пределов покупки">
+                <span class="position-number">7</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+                <span class="position-number">8</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+                <span class="position-number">9</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+                <span class="position-number">10</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+                <span class="position-number">11</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+                <span class="position-number">12</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+            </ol>
+          </figure>
+        </section>
+
+        <section class="result panel for-2" data-guests="2" data-packs="0" data-capacity="2" data-covers="1,2" data-is-threshold="false" aria-label="Результат для 2 гостей">
+          <div class="answer">
+            <h2>Покупать не нужно</h2>
+            <p class="coverage">С этой покупкой хватит до 2 гостей</p>
+            <p class="note">Двенадцати домашних печений хватает на 2 гостей; пачка не нужна.</p>
+          </div>
+
+          <figure class="scale-figure">
+            <figcaption>Шкала позиций гостей: 1–12</figcaption>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <ol class="scale">
+              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+                <span class="position-number">1</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered current" aria-label="Позиция 2: В пределах покупки; выбрано">
+                <span class="position-number">2</span>
+                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+              </li>
+              <li class="outside" aria-label="Позиция 3: Вне пределов покупки">
+                <span class="position-number">3</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 4: Вне пределов покупки">
+                <span class="position-number">4</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 5: Вне пределов покупки">
+                <span class="position-number">5</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 6: Вне пределов покупки">
+                <span class="position-number">6</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 7: Вне пределов покупки">
+                <span class="position-number">7</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+                <span class="position-number">8</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+                <span class="position-number">9</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+                <span class="position-number">10</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+                <span class="position-number">11</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+                <span class="position-number">12</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+            </ol>
+          </figure>
+        </section>
+
+        <section class="result panel for-3" data-guests="3" data-packs="1" data-capacity="3" data-covers="1,2,3" data-is-threshold="true" aria-label="Результат для 3 гостей">
+          <div class="answer">
+            <h2>Купить 1 пачку</h2>
+            <p class="coverage">С этой покупкой хватит до 3 гостей</p>
+            <p class="note">Порог: на 2 гостей хватало домашних печений. Ещё одна пачка — итого 1 пачка; итог назван целиком, держать прошлое в голове не нужно.</p>
+          </div>
+
+          <figure class="scale-figure">
+            <figcaption>Шкала позиций гостей: 1–12</figcaption>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <ol class="scale">
+              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+                <span class="position-number">1</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+                <span class="position-number">2</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered current" aria-label="Позиция 3: В пределах покупки; выбрано">
+                <span class="position-number">3</span>
+                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+              </li>
+              <li class="outside" aria-label="Позиция 4: Вне пределов покупки">
+                <span class="position-number">4</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 5: Вне пределов покупки">
+                <span class="position-number">5</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 6: Вне пределов покупки">
+                <span class="position-number">6</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 7: Вне пределов покупки">
+                <span class="position-number">7</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+                <span class="position-number">8</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+                <span class="position-number">9</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+                <span class="position-number">10</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+                <span class="position-number">11</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+                <span class="position-number">12</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+            </ol>
+          </figure>
+        </section>
+
+        <section class="result panel for-4" data-guests="4" data-packs="2" data-capacity="4" data-covers="1,2,3,4" data-is-threshold="true" aria-label="Результат для 4 гостей">
+          <div class="answer">
+            <h2>Купить 2 пачки</h2>
+            <p class="coverage">С этой покупкой хватит до 4 гостей</p>
+            <p class="note">Порог: на 3 гостей хватало 1 пачки. Ещё одна пачка — итого 2 пачки; итог назван целиком, держать прошлое в голове не нужно.</p>
+          </div>
+
+          <figure class="scale-figure">
+            <figcaption>Шкала позиций гостей: 1–12</figcaption>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <ol class="scale">
+              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+                <span class="position-number">1</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+                <span class="position-number">2</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+                <span class="position-number">3</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered current" aria-label="Позиция 4: В пределах покупки; выбрано">
+                <span class="position-number">4</span>
+                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+              </li>
+              <li class="outside" aria-label="Позиция 5: Вне пределов покупки">
+                <span class="position-number">5</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 6: Вне пределов покупки">
+                <span class="position-number">6</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 7: Вне пределов покупки">
+                <span class="position-number">7</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+                <span class="position-number">8</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+                <span class="position-number">9</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+                <span class="position-number">10</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+                <span class="position-number">11</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+                <span class="position-number">12</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+            </ol>
+          </figure>
+        </section>
+
+        <section class="result panel for-5" data-guests="5" data-packs="3" data-capacity="6" data-covers="1,2,3,4,5,6" data-is-threshold="true" aria-label="Результат для 5 гостей">
+          <div class="answer">
+            <h2>Купить 3 пачки</h2>
+            <p class="coverage">С этой покупкой хватит до 6 гостей</p>
+            <p class="note">Порог: на 4 гостей хватало 2 пачки. Ещё одна пачка — итого 3 пачки; итог назван целиком, держать прошлое в голове не нужно.</p>
+          </div>
+
+          <figure class="scale-figure">
+            <figcaption>Шкала позиций гостей: 1–12</figcaption>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <ol class="scale">
+              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+                <span class="position-number">1</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+                <span class="position-number">2</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+                <span class="position-number">3</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+                <span class="position-number">4</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered current" aria-label="Позиция 5: В пределах покупки; выбрано">
+                <span class="position-number">5</span>
+                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+              </li>
+              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+                <span class="position-number">6</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 7: Вне пределов покупки">
+                <span class="position-number">7</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+                <span class="position-number">8</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+                <span class="position-number">9</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+                <span class="position-number">10</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+                <span class="position-number">11</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+                <span class="position-number">12</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+            </ol>
+          </figure>
+        </section>
+
+        <section class="result panel for-6" data-guests="6" data-packs="3" data-capacity="6" data-covers="1,2,3,4,5,6" data-is-threshold="false" aria-label="Результат для 6 гостей">
+          <div class="answer">
+            <h2>Купить 3 пачки</h2>
+            <p class="coverage">С этой покупкой хватит до 6 гостей</p>
+            <p class="note">Покупка не меняется: 3 пачки нужно и на 6, и на 5 гостей.</p>
+          </div>
+
+          <figure class="scale-figure">
+            <figcaption>Шкала позиций гостей: 1–12</figcaption>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <ol class="scale">
+              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+                <span class="position-number">1</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+                <span class="position-number">2</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+                <span class="position-number">3</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+                <span class="position-number">4</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+                <span class="position-number">5</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered current" aria-label="Позиция 6: В пределах покупки; выбрано">
+                <span class="position-number">6</span>
+                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+              </li>
+              <li class="outside" aria-label="Позиция 7: Вне пределов покупки">
+                <span class="position-number">7</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+                <span class="position-number">8</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+                <span class="position-number">9</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+                <span class="position-number">10</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+                <span class="position-number">11</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+                <span class="position-number">12</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+            </ol>
+          </figure>
+        </section>
+
+        <section class="result panel for-7" data-guests="7" data-packs="4" data-capacity="7" data-covers="1,2,3,4,5,6,7" data-is-threshold="true" aria-label="Результат для 7 гостей">
+          <div class="answer">
+            <h2>Купить 4 пачки</h2>
+            <p class="coverage">С этой покупкой хватит до 7 гостей</p>
+            <p class="note">Порог: на 6 гостей хватало 3 пачки. Ещё одна пачка — итого 4 пачки; итог назван целиком, держать прошлое в голове не нужно.</p>
+          </div>
+
+          <figure class="scale-figure">
+            <figcaption>Шкала позиций гостей: 1–12</figcaption>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <ol class="scale">
+              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+                <span class="position-number">1</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+                <span class="position-number">2</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+                <span class="position-number">3</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+                <span class="position-number">4</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+                <span class="position-number">5</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+                <span class="position-number">6</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered current" aria-label="Позиция 7: В пределах покупки; выбрано">
+                <span class="position-number">7</span>
+                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+              </li>
+              <li class="outside" aria-label="Позиция 8: Вне пределов покупки">
+                <span class="position-number">8</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+                <span class="position-number">9</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+                <span class="position-number">10</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+                <span class="position-number">11</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+                <span class="position-number">12</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+            </ol>
+          </figure>
+        </section>
+
+        <section class="result panel for-8" data-guests="8" data-packs="5" data-capacity="8" data-covers="1,2,3,4,5,6,7,8" data-is-threshold="true" aria-label="Результат для 8 гостей">
+          <div class="answer">
+            <h2>Купить 5 пачек</h2>
+            <p class="coverage">С этой покупкой хватит до 8 гостей</p>
+            <p class="note">Порог: на 7 гостей хватало 4 пачки. Ещё одна пачка — итого 5 пачек; итог назван целиком, держать прошлое в голове не нужно.</p>
+          </div>
+
+          <figure class="scale-figure">
+            <figcaption>Шкала позиций гостей: 1–12</figcaption>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <ol class="scale">
+              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+                <span class="position-number">1</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+                <span class="position-number">2</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+                <span class="position-number">3</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+                <span class="position-number">4</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+                <span class="position-number">5</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+                <span class="position-number">6</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 7: В пределах покупки">
+                <span class="position-number">7</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered current" aria-label="Позиция 8: В пределах покупки; выбрано">
+                <span class="position-number">8</span>
+                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+              </li>
+              <li class="outside" aria-label="Позиция 9: Вне пределов покупки">
+                <span class="position-number">9</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 10: Вне пределов покупки">
+                <span class="position-number">10</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+                <span class="position-number">11</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+                <span class="position-number">12</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+            </ol>
+          </figure>
+        </section>
+
+        <section class="result panel for-9" data-guests="9" data-packs="6" data-capacity="10" data-covers="1,2,3,4,5,6,7,8,9,10" data-is-threshold="true" aria-label="Результат для 9 гостей">
+          <div class="answer">
+            <h2>Купить 6 пачек</h2>
+            <p class="coverage">С этой покупкой хватит до 10 гостей</p>
+            <p class="note">Порог: на 8 гостей хватало 5 пачек. Ещё одна пачка — итого 6 пачек; итог назван целиком, держать прошлое в голове не нужно.</p>
+          </div>
+
+          <figure class="scale-figure">
+            <figcaption>Шкала позиций гостей: 1–12</figcaption>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <ol class="scale">
+              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+                <span class="position-number">1</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+                <span class="position-number">2</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+                <span class="position-number">3</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+                <span class="position-number">4</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+                <span class="position-number">5</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+                <span class="position-number">6</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 7: В пределах покупки">
+                <span class="position-number">7</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 8: В пределах покупки">
+                <span class="position-number">8</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered current" aria-label="Позиция 9: В пределах покупки; выбрано">
+                <span class="position-number">9</span>
+                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+              </li>
+              <li class="covered" aria-label="Позиция 10: В пределах покупки">
+                <span class="position-number">10</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+                <span class="position-number">11</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+                <span class="position-number">12</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+            </ol>
+          </figure>
+        </section>
+
+        <section class="result panel for-10" data-guests="10" data-packs="6" data-capacity="10" data-covers="1,2,3,4,5,6,7,8,9,10" data-is-threshold="false" aria-label="Результат для 10 гостей">
+          <div class="answer">
+            <h2>Купить 6 пачек</h2>
+            <p class="coverage">С этой покупкой хватит до 10 гостей</p>
+            <p class="note">Покупка не меняется: 6 пачек нужно и на 10, и на 9 гостей.</p>
+          </div>
+
+          <figure class="scale-figure">
+            <figcaption>Шкала позиций гостей: 1–12</figcaption>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <ol class="scale">
+              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+                <span class="position-number">1</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+                <span class="position-number">2</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+                <span class="position-number">3</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+                <span class="position-number">4</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+                <span class="position-number">5</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+                <span class="position-number">6</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 7: В пределах покупки">
+                <span class="position-number">7</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 8: В пределах покупки">
+                <span class="position-number">8</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 9: В пределах покупки">
+                <span class="position-number">9</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered current" aria-label="Позиция 10: В пределах покупки; выбрано">
+                <span class="position-number">10</span>
+                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+              </li>
+              <li class="outside" aria-label="Позиция 11: Вне пределов покупки">
+                <span class="position-number">11</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+                <span class="position-number">12</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+            </ol>
+          </figure>
+        </section>
+
+        <section class="result panel for-11" data-guests="11" data-packs="7" data-capacity="11" data-covers="1,2,3,4,5,6,7,8,9,10,11" data-is-threshold="true" aria-label="Результат для 11 гостей">
+          <div class="answer">
+            <h2>Купить 7 пачек</h2>
+            <p class="coverage">С этой покупкой хватит до 11 гостей</p>
+            <p class="note">Порог: на 10 гостей хватало 6 пачек. Ещё одна пачка — итого 7 пачек; итог назван целиком, держать прошлое в голове не нужно.</p>
+          </div>
+
+          <figure class="scale-figure">
+            <figcaption>Шкала позиций гостей: 1–12</figcaption>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <ol class="scale">
+              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+                <span class="position-number">1</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+                <span class="position-number">2</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+                <span class="position-number">3</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+                <span class="position-number">4</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+                <span class="position-number">5</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+                <span class="position-number">6</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 7: В пределах покупки">
+                <span class="position-number">7</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 8: В пределах покупки">
+                <span class="position-number">8</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 9: В пределах покупки">
+                <span class="position-number">9</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 10: В пределах покупки">
+                <span class="position-number">10</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered current" aria-label="Позиция 11: В пределах покупки; выбрано">
+                <span class="position-number">11</span>
+                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+              </li>
+              <li class="outside" aria-label="Позиция 12: Вне пределов покупки">
+                <span class="position-number">12</span>
+                <span class="position-status">Вне пределов покупки</span>
+              </li>
+            </ol>
+          </figure>
+        </section>
+
+        <section class="result panel for-12" data-guests="12" data-packs="8" data-capacity="12" data-covers="1,2,3,4,5,6,7,8,9,10,11,12" data-is-threshold="true" aria-label="Результат для 12 гостей">
+          <div class="answer">
+            <h2>Купить 8 пачек</h2>
+            <p class="coverage">С этой покупкой хватит до 12 гостей</p>
+            <p class="note">Порог: на 11 гостей хватало 7 пачек. Ещё одна пачка — итого 8 пачек; итог назван целиком, держать прошлое в голове не нужно.</p>
+          </div>
+
+          <figure class="scale-figure">
+            <figcaption>Шкала позиций гостей: 1–12</figcaption>
+            <p class="scale-key"><span class="key-swatch covered-key" aria-hidden="true"></span>В пределах покупки <span class="key-swatch outside-key" aria-hidden="true"></span>Вне пределов покупки</p>
+            <ol class="scale">
+              <li class="covered" aria-label="Позиция 1: В пределах покупки">
+                <span class="position-number">1</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 2: В пределах покупки">
+                <span class="position-number">2</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 3: В пределах покупки">
+                <span class="position-number">3</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 4: В пределах покупки">
+                <span class="position-number">4</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 5: В пределах покупки">
+                <span class="position-number">5</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 6: В пределах покупки">
+                <span class="position-number">6</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 7: В пределах покупки">
+                <span class="position-number">7</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 8: В пределах покупки">
+                <span class="position-number">8</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 9: В пределах покупки">
+                <span class="position-number">9</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 10: В пределах покупки">
+                <span class="position-number">10</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered" aria-label="Позиция 11: В пределах покупки">
+                <span class="position-number">11</span>
+                <span class="position-status">В пределах покупки</span>
+              </li>
+              <li class="covered current" aria-label="Позиция 12: В пределах покупки; выбрано">
+                <span class="position-number">12</span>
+                <span class="position-status">В пределах покупки</span><span class="current-mark">Выбрано</span>
+              </li>
+            </ol>
+          </figure>
+        </section>
+      </div>
+    </fieldset>
+
+    <footer>Понятия capacity/threshold — v2bot-agent #31501; независимая шкала — #31579; контекст сопоставляемых планов — Meliora #30282.</footer>
+  </main>
+</body>
+</html>
